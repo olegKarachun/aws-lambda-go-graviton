@@ -1,6 +1,6 @@
 # AWS Lambda Go on ARM64 (Graviton)
 
-[![Go Version](https://img.shields.io/github/go-mod/go-version/olegKarachun/aws-lambda-go-graviton)](https://golang.org)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/olegKarachun/aws-lambda-go-graviton?filename=src%2Fgo-lambda%2Fgo.mod)](https://golang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains a highly optimized Go function for AWS Lambda, running on **ARM64 (Graviton)** architecture with the **Amazon Linux 2023 (AL2023)** runtime.
