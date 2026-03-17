@@ -1,33 +1,22 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool
-*.out
-
-# Go workspace file
-go.work
-
-# Dependency directories
-vendor/
-
-# Build output
-bin/
+# AWS SAM artifacts
 .aws-sam/
+samconfig.toml
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
+# Go binaries and build artifacts
+bin/
+bootstrap
+go-lambda-arm64
 
-# OS
+# Operating System files
 .DS_Store
 Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.*

@@ -1,30 +1,38 @@
-# AWS Lambda Performance Battle: Go vs .NET (Part 1 - Go)
+# AWS Lambda Go on ARM64 (Graviton)
 
-This repository contains the source code for the first part of my benchmarking series: **"Mastering Go on AWS Lambda: The Graviton & AL2023 Way"**.
+[![Go Version](https://img.shields.io/github/go-mod/go-version/olegKarachun/aws-lambda-go-graviton)](https://golang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Project Goal
+This repository contains a highly optimized Go function for AWS Lambda, running on **ARM64 (Graviton)** architecture with the **Amazon Linux 2023 (AL2023)** runtime.
 
-To demonstrate how to build a highly optimized Go function for AWS Lambda using the latest `provided.al2023` runtime and ARM64 (Graviton) architecture.
+This is **Part 1** of my series: _"Battle of the Titans: Go vs .NET Native AOT"_.
 
-## Optimization Techniques Used
+## 🚀 Optimization Highlights
 
-- **Custom Runtime (AL2023):** Using the most minimalist Amazon Linux OS.
-- **ARM64 Architecture:** Leveraging Graviton processors for cost-efficiency.
-- **Selective Tags:** Using `-tags lambda.norpc` to strip legacy code.
-- **Binary Stripping:** Using linker flags (`-s -w`) to minimize binary size.
+To achieve the best possible performance and the lowest "Cold Start" times, this project implements:
 
-## Quick Start
+- **Custom Runtime (`provided.al2023`):** Using the most minimalist OS available in AWS for faster boot times.
+- **ARM64 (Graviton):** Specifically compiled for Graviton2/3 processors to get ~20% better price/performance.
+- **Selective Compilation (`-tags lambda.norpc`):** Strips away legacy RPC code, reducing the binary size.
+- **Linker Stripping (`-ldflags="-s -w"`):** Removes debug information and symbol tables for a leaner binary.
+
+## 🛠 Project Structure
+
+- `main.go`: Business logic (JSON parsing, SHA-256 hashing, filtering).
+- `template.yaml`: AWS SAM template defining the Infrastructure as Code (IaC).
+- `Makefile`: Automated build and deploy commands.
+
+## 🏁 Quick Start
 
 ### Prerequisites
 
 - Go 1.21+
 - AWS SAM CLI
-- Docker (for local testing)
+- Make (optional, but recommended)
 
-### Build
+### Build & Deploy
 
-To compile the highly optimized ARM64 binary:
-
-```bash
-make build
-```
+1. **Compile the optimized binary:**
+   ```bash
+   make build
+   ```
