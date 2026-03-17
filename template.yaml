@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Battle of the Titans - Golang Handler
+
+Resources:
+  GolangTitanFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: go1.x
+    Properties:
+      FunctionName: GolangTitan
+      Description: Golang Lambda for Cold Start Benchmark
+      CodeUri: src/go-lambda/
+      Handler: bootstrap
+      Runtime: provided.al2023
+      Architectures:
+        - arm64
+      MemorySize: 256
+      Timeout: 10
+      Environment:
+        Variables:
+          # Стартовое значение. Будем менять его скриптом для принудительного Cold Start
+          FORCE_COLD_START: "initial"
