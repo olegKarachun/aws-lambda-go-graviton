@@ -3,7 +3,11 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/olegKarachun/aws-lambda-go-graviton?filename=src%2Fgo-lambda%2Fgo.mod)](https://golang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+
+
 This repository contains a highly optimized Go function for AWS Lambda, running on **ARM64 (Graviton)** architecture with the **Amazon Linux 2023 (AL2023)** runtime.
+
+📖 **Read the full deep-dive article on Dev.to:** [Battle of the Titans (Part 1): The Ultimate Go Lambda on AWS Graviton](https://dev.to/aleh_karachun/battle-of-the-titans-part-1-the-ultimate-go-lambda-on-aws-graviton-2632)
 
 This is **Part 1** of my series: _"Battle of the Titans: Go vs .NET Native AOT"_.
 
