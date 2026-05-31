@@ -1,40 +1,47 @@
-name: Deploy Lambda to AWS
+name: Deploy Go Lambda to AWS
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
+    inputs:
+      cold_start_token:
+        description: 'To initiate lambda cold start'
+        required: true
+        default: 'run-1'
+        type: string
 
 jobs:
-    build-and-deploy:
-        runs-on: ubuntu-latest
-        environment: aws-dev
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Set up Go
-              uses: actions/setup-go@v5
-              with:
-                  go-version: "^1.21"
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '^1.21'
 
-            - name: Set up AWS SAM CLI
-              uses: aws-actions/setup-sam@v2
+      - name: Set up AWS SAM CLI
+        uses: aws-actions/setup-sam@v2
 
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v4
-              with:
-                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws-region: eu-central-1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
 
-            - name: Build Go binary
-              run: make build
+      - name: Build Go binary
+        run: make build
 
-            - name: Deploy via SAM
-              run: |
-                  sam deploy \
-                    --stack-name titan-go-stack \
-                    --resolve-s3 \
-                    --capabilities CAPABILITY_IAM \
-                    --no-confirm-changeset \
-                    --no-fail-on-empty-changeset
+      - name: Deploy via SAM
+        run: |
+          sam deploy \
+            --stack-name titan-go-stack \
+            --resolve-s3 \
+            --capabilities CAPABILITY_IAM \
+            --no-confirm-changeset \
+            --no-fail-on-empty-changeset \
+            --parameter-overrides ColdStartToken="${{ inputs.cold_start_token }}"
