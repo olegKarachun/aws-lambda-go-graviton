@@ -2,15 +2,19 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: Battle of the Titans - Golang Handler
 
+Parameters:
+  ColdStartToken:
+    Type: String
+    Default: "initial"
+    Description: "Token to trigger a configuration update and force a cold start"
+
 Resources:
   GolangTitanFunction:
     Type: AWS::Serverless::Function
-    Metadata:
-      BuildMethod: go1.x
     Properties:
       FunctionName: GolangTitan
       Description: Golang Lambda for Cold Start Benchmark
-      CodeUri: src/go-lambda/
+      CodeUri: bin/ 
       Handler: bootstrap
       Runtime: provided.al2023
       Architectures:
@@ -19,4 +23,4 @@ Resources:
       Timeout: 10
       Environment:
         Variables:
-          FORCE_COLD_START: "initial"
+          FORCE_COLD_START: !Ref ColdStartToken
