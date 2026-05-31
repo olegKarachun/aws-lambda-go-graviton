@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       cold_start_token:
-        description: 'To initiate lambda cold start'
+        description: 'Token to trigger a configuration update and force a cold start'
         required: true
         default: 'run-1'
         type: string
