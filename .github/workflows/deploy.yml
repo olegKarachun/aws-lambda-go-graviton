@@ -6,6 +6,7 @@ on:
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+        environment: aws-dev
 
         steps:
             - name: Checkout repository
