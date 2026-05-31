@@ -19,5 +19,4 @@ Resources:
       Timeout: 10
       Environment:
         Variables:
-          # Стартовое значение. Будем менять его скриптом для принудительного Cold Start
           FORCE_COLD_START: "initial"
