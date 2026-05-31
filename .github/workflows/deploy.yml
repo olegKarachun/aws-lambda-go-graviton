@@ -33,7 +33,7 @@ jobs:
             - name: Deploy via SAM
               run: |
                   sam deploy \
-                    --stack-name go-graviton-lambda-stack \
+                    --stack-name titan-go-stack \
                     --resolve-s3 \
                     --capabilities CAPABILITY_IAM \
                     --no-confirm-changeset \
